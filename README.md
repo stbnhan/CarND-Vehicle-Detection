@@ -21,10 +21,10 @@ The goals / steps of this project are the following:
 [image1_1]: ./output_images/Vehicles1.png
 [image1_2]: ./output_images/Vehicles2.png
 [image1_3]: ./output_images/Vehicles3.png
-[image2_1]: ./output_images/NonVehicles1.jpg
-[image2_2]: ./output_images/NonVehicles2.jpg
-[image2_3]: ./output_images/NonVehicles3.jpg
-[image3]: ./output_images/HOG_example.jpg
+[image2_1]: ./output_images/NonVehicles1.png
+[image2_2]: ./output_images/NonVehicles2.png
+[image2_3]: ./output_images/NonVehicles3.png
+[image3]: ./output_images/HOG_example.png
 [image4_1]: ./output_images/test4_window_img.png
 [image4_2]: ./output_images/test6_window_img.png
 [image5_1]: ./output_images/test4_boxes.png
@@ -72,7 +72,7 @@ Final values used for hog parameters:
 orientations = 9
 pixels_per_cell = (8, 8)
 cells_per_block = (2, 2)  
-cspace =''YCrC''
+cspace ='YCrC'
 ```
 
 Here is an example using above parameters:  
