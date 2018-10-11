@@ -169,7 +169,7 @@ Here's a [link to my video result](./P5_project_video.mp4)
 
 I collected the positive detections in each frame of the video in a list. From this list, I created a heatmap and then applied thresholded to that map to identify and confirm vehicle positions. I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap. Each blob corresponded to a vehicle, and overlapping assured the quality of the detection. Finally, I constructed bounding boxes to cover the area of each blob detected.  
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
+Finally, I took the result of `scipy.ndimage.measurements.label()` of previous frame's heatmap to add confidence in the current heatmap. This is done by using a threshold of previous heatmap's mean value and adding to add confidence in the current frame while increasing `apply_threshold()` function. This adds another filtering process relative to previous frame.  
 
 ### Here are sample frames and their corresponding heatmaps:
 

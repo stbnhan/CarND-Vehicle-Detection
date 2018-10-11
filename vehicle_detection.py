@@ -14,6 +14,7 @@ from skimage.feature import hog
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.externals import joblib
 from scipy.ndimage.measurements import label
+from collections import deque
 
 ##############################################################################
 
@@ -160,6 +161,8 @@ hog_channel = 'ALL'
 spatial_feat=True
 hist_feat=True
 hog_feat=True
+# Initialize heat history
+heat_past = np.zeros((720,1280))
 
 ##############################################################################
 # Training data (comment out once done)
@@ -381,6 +384,13 @@ def draw_labeled_bboxes(img, labels):
 	# Return the image
 	return img
 
+def history(heat, heat_past):
+	threshold = np.mean(heat_past)
+	heat_past[heat_past < threshold] = 0
+	heat_past[heat_past >= threshold] = 1
+	heat += heat_past
+	return heat
+
 # Final pipeline
 # Define a single function that can extract features using hog sub-sampling and make predictions
 def find_cars(img):
@@ -466,8 +476,12 @@ def find_cars(img):
 
 	# Add heat to each box in box list
 	heat = add_heat(heat,box_list)
+	global heat_past
+	# Add confidence in vehicle detection by comparing to past
+	heat = history(heat, heat_past)
 	# Apply threshold to help remove false positives
-	heat = apply_threshold(heat,1)
+	heat = apply_threshold(heat,2)
+	heat_past = heat
 	# Visualize the heatmap when displaying	
 	heatmap = np.clip(heat, 0, 255)
 	# Find final boxes from heatmap using label function
