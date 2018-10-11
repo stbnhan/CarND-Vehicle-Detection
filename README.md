@@ -18,13 +18,21 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: ./examples/Vehicles.png
-[image2]: ./examples/NonVehicles.jpg
-[image3]: ./examples/HOG_example.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/boxes_drawn_vehicles.png
-[image6]: ./examples/
-[image7]: ./examples/
+[image1_1]: ./output_images/Vehicles1.png
+[image1_2]: ./output_images/Vehicles2.png
+[image1_3]: ./output_images/Vehicles3.png
+[image2_1]: ./output_images/NonVehicles1.jpg
+[image2_2]: ./output_images/NonVehicles2.jpg
+[image2_3]: ./output_images/NonVehicles3.jpg
+[image3]: ./output_images/HOG_example.jpg
+[image4_1]: ./output_images/test4_window_img.png
+[image4_2]: ./output_images/test6_window_img.png
+[image5_1]: ./output_images/test4_boxes.png
+[image5_2]: ./output_images/test6_boxes.png
+[image6_1]: ./output_images/test4_heatmap_final.png
+[image6_2]: ./output_images/test6_heatmap_final.png
+[image7_1]: ./output_images/test4_final.png
+[image7_2]: ./output_images/test6_final.png
 [video1]: ./P5_project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -49,10 +57,14 @@ The code for this step is contained in lines 61 - 142 which contains all the fea
 First step was to load all the vehicle and non-vehicle image data set.  Here's an example of one of each of the classes:  
 
 [Vehicle]
-![alt text][image1]
+![alt text][image1_1]
+![alt text][image1_2]
+![alt text][image1_3]
   
 [Non-Vehicle]
-![alt text][image2]
+![alt text][image2_1]
+![alt text][image2_2]
+![alt text][image2_3]
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 Final values used for hog parameters:  
@@ -134,14 +146,16 @@ X_scaler = joblib.load('X_scaler.joblib')
 
 To save computation efforts, I applied region of interest on where the sliding window will search for vehicles. Given that the cars don't fly around in the sky and camera is facing forward at a consistent angle, the sliding window will only focus on bottom half of each frame (also excluding the vehicle's hood). Then sliding window scale is defined to pick up the most vehicles with most accuracy. This code can be found in lines 296 - 319 for test images and lines 391 - 465 for video pipeline. 
 
-![alt text][image4]
+![alt text][image4_1]
+![alt text][image4_2]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Like mentioned above, combination of feature extractions and normalizing provided good results.  
 Here's an example:  
 
-![alt text][image5]
+![alt text][image5_1]
+![alt text][image5_2]
 
 ---
 
@@ -157,16 +171,14 @@ I collected the positive detections in each frame of the video in a list. From t
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
+### Here are sample frames and their corresponding heatmaps:
 
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+![alt text][image6_1]
+![alt text][image6_2]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
+![alt text][image7_1]
+![alt text][image7_2]
 
 
 ---
